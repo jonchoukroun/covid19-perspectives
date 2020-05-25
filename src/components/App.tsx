@@ -1,7 +1,8 @@
 import React, { FC, useState } from "react";
 
-import Welcome from "./welcome/Welcome";
-import Cities from "./cities/Cities";
+import Header from "./Header";
+import Welcome from "./Welcome";
+import Cities from "./Cities";
 
 export enum ScreenName {
     "Welcome",
@@ -19,6 +20,7 @@ const App: FC = () => {
 
     return (
         <div>
+            <Header />
             {welcomeDisplayed ? (
                 <Welcome navCallback={navigateToCities} />
             ) : (

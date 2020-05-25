@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 
-import { deathRate } from "../../data/deathCount";
-import { cityPopulations } from "../../data/populations";
+import { deathRate } from "../data/deathCount";
+import { cityPopulations } from "../data/populations";
 
 const { avgDeaths } = deathRate();
 
@@ -19,12 +19,12 @@ const Cities: FC = () => {
     });
 
     return (
-        <div>
-            <h1>City Populations</h1>
-            <h4>
+        <div className="content">
+            <h2>City Populations</h2>
+            <p>
                 With an average death rate of {avgDeaths} people, it wouldn't
                 take long to wipe out the populations of these major cities:
-            </h4>
+            </p>
             <ul>{list}</ul>
         </div>
     );

@@ -4,9 +4,15 @@ import * as serviceWorker from "./serviceWorker";
 
 import App from "./components/App";
 
+import { ThemeProvider } from "styled-components";
+import { GlobalStyles, theme } from "./styles";
+
 ReactDOM.render(
     <React.StrictMode>
-        <App />
+        <ThemeProvider theme={theme}>
+            <GlobalStyles />
+            <App />
+        </ThemeProvider>
     </React.StrictMode>,
     document.getElementById("root")
 );

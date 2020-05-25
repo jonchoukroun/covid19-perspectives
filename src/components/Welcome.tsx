@@ -1,9 +1,10 @@
 import React, { FC, MouseEvent } from "react";
 
-import { deathCount, deathRate } from "../../data/deathCount";
-import { ScreenName, NavCallback } from "../App";
+import { deathCount, deathRate } from "../data/deathCount";
+import { ScreenName, NavCallback } from "./App";
 
-import styled, { css } from "styled-components";
+import styled from "styled-components";
+import { BreakPoints } from "../styles";
 
 interface IWelcomeProps {
     navCallback: NavCallback;
@@ -19,12 +20,7 @@ const Welcome: FC<IWelcomeProps> = ({ navCallback }) => {
     };
 
     return (
-        <WindowContainer>
-            <HeaderContainer>
-                <h1>U.S. Covid-19 Deaths</h1>
-                <h3>...in Perspective</h3>
-            </HeaderContainer>
-
+        <div className="content">
             <p>
                 Since {startDate} the U.S. has experienced {totalDeaths} deaths.
                 Over a period of {days} days, that's an average of {avgDeaths}{" "}
@@ -37,29 +33,30 @@ const Welcome: FC<IWelcomeProps> = ({ navCallback }) => {
                 project aims to make the toll of Covid-19 easier to understand.
             </p>
 
-            <button type="button" onClick={clickHandler}>
-                Continue
-            </button>
-        </WindowContainer>
+            <ButtonRow>
+                <button type="button" onClick={clickHandler}>
+                    Continue
+                </button>
+            </ButtonRow>
+        </div>
     );
 };
 
-const WindowContainer = styled.div`
+const ButtonRow = styled.div`
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    flex-direction: row;
     justify-content: center;
-`;
+    align-items: center;
+    width: 100%;
+    margin: 1em 0;
 
-const HeaderContainer = styled.div`
-    ${({ theme }) => css`
-        h1 {
-            color: ${theme.colors.darkGray};
-        }
-        h2 {
-            color: ${theme.colors.green};
-        }
-    `}
+    @media ${BreakPoints.mobileM} {
+        margin: 3em 0;
+    }
+
+    @media ${BreakPoints.tablet} {
+        margin: 4em 0 0;
+    }
 `;
 
 export default Welcome;

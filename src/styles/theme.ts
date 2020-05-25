@@ -1,38 +1,29 @@
-const green = "#008080";
-const blue = "#000080";
-const black = "#252525";
-const lightGray = "#e7e7e7";
-const gray = "#c0c0c0";
+const black = "#000000";
 const darkGray = "#585858";
-const white = "#fff";
+const gray = "#c0c0c0";
+const lightGray = "#e7e7e7";
+const red = "#8a0303";
 
 export default {
     colors: {
-        green: green,
-        blue: blue,
+        dark: darkGray,
+        medium: gray,
         black: black,
-        lightGray: lightGray,
-        gray: gray,
-        darkGray: darkGray,
-        white: white,
+        accent: red,
+        light: lightGray,
     },
-    header: {
-        fontWeight: "500",
-        transform: "scaleX(1.1),",
+    borders: {
+        default: `2px solid ${gray}`,
+        accent: `2px solid ${red}`,
     },
-    body: {
-        fontSize: "18px",
+    boxShadows: {
+        default:
+            "0 1px 1px 0 rgba(0,0,0,0.14), 0 2px 1px -1px rgba(0,0,0,0.12), 0 1px 3px 0 rgba(0,0,0,0.20)",
+        elevated:
+            "0 6px 10px 0 rgba(0,0,0,0.14), 0 1px 18px 0 rgba(0,0,0,0.12), 0 3px 5px -1px rgba(0,0,0,0.20)",
     },
-    border: {
-        defaultWidth: "2px",
-        thin: "1px",
-        edge: "solid",
-        inner: "groove",
-        radius: "0",
-        defaultColor: "lightGray darkGray darkGray lightGray",
-        insetColor: "black lightGray lightGray black",
+    fonts: {
+        heading: "Anton",
+        body: "Montserrat",
     },
-    defaultDropShadow: "3px 3px 0px 1px rgba(0, 0, 0, 0.6)",
-    thinDropShadow: "1px 1px 0px 0px rgba(0, 0, 0, 0.6)",
-    darkDropShadow: "1px 1px 0px 3px rgba(0, 0, 0, 0.7)",
 };

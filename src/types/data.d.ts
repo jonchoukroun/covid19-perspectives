@@ -10,4 +10,14 @@ declare module "data-types" {
         totalDeaths: number;
         avgDeaths: number;
     }
+
+    export interface FooterNote {
+        num: number;
+        text: string;
+    }
+
+    export interface CityPopulation {
+        name: string;
+        population: number;
+    }
 }

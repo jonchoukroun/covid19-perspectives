@@ -29,7 +29,8 @@ export default createGlobalStyle`
                     display: flex;
                     flex-direction: column;
                     align-items: start;
-                    justify-content: center;
+                    justify-content: start;
+                    height: 90%;
                     margin-top: 1em;
 
                     @media ${BreakPoints.tablet} {

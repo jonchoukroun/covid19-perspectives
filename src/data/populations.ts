@@ -1,6 +1,6 @@
-import { Time } from "data-types";
+import { Time, CityPopulation } from "data-types";
 
-export const cityPopulations: { name: string; population: number }[] = [
+export const cityPopulations: CityPopulation[] = [
     {
         name: "New York",
         population: 8_390_000,

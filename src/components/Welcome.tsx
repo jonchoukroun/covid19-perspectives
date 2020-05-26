@@ -1,8 +1,11 @@
 import React, { FC, MouseEvent } from "react";
+import Footer from "./Footer";
 
 import { deathCount, deathRate } from "../data/deathCount";
 import { ScreenName, NavCallback } from "./App";
 import { formatNumber } from "../utils/numbers";
+
+import { deathRateNote } from "../data/deathCount";
 
 import styled from "styled-components";
 import { BreakPoints } from "../styles";
@@ -12,9 +15,12 @@ interface IWelcomeProps {
 }
 
 const Welcome: FC<IWelcomeProps> = ({ navCallback }) => {
-    // TODO: update format to MMMM DD, YYYY
-    const startDate = new Date(deathCount[0].date).toDateString();
-    const { days, totalDeaths, avgDeaths } = deathRate();
+    const dateOptions = { month: "long", day: "numeric", year: "numeric" };
+    const startDate = new Date(deathCount[0].date).toLocaleDateString(
+        "en-us",
+        dateOptions
+    );
+    const { totalDeaths, avgDeaths } = deathRate();
 
     const clickHandler = (e: MouseEvent<HTMLButtonElement>): void => {
         e.preventDefault();
@@ -24,13 +30,11 @@ const Welcome: FC<IWelcomeProps> = ({ navCallback }) => {
     return (
         <div className="content">
             <p>
-                Since {startDate} the U.S. has experienced{" "}
-                {formatNumber(totalDeaths)} deaths. Over a period of{" "}
-                {formatNumber(days)} days, that's an average of{" "}
-                {formatNumber(avgDeaths)} lives lost each day.
+                Since {startDate}, {formatNumber(totalDeaths)} Americans have
+                died. That's an average of {formatNumber(avgDeaths)} deaths per
+                day<sup>1</sup>.
             </p>
 
-            <br />
             <p>
                 It's difficult to put these numbers in perspective, so this
                 project aims to make the toll of Covid-19 easier to understand.
@@ -41,6 +45,8 @@ const Welcome: FC<IWelcomeProps> = ({ navCallback }) => {
                     Continue
                 </button>
             </ButtonRow>
+
+            <Footer content={deathRateNote} />
         </div>
     );
 };

@@ -1,9 +1,9 @@
-import { DeathRate } from "data-types";
+import { DeathRate, FooterNote } from "data-types";
 
 export const deathCount: { date: string; deaths: number }[] = [
     {
         // TODO: verify 1st death date
-        date: "Feb 01, 2020",
+        date: "February 01, 2020",
         deaths: 1,
     },
     {
@@ -28,3 +28,11 @@ export const deathRate = (): DeathRate => {
         avgDeaths: Math.floor(deaths / totalDays),
     };
 };
+
+export const deathRateNote: FooterNote[] = [
+    {
+        num: 1,
+        text:
+            "A daily average does not reflect the change over time in the number of casualties. Clearly, the number of fatalities has been climbing. This estimate is useful mostly for understanding what this loss means to the United States.",
+    },
+];

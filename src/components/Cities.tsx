@@ -1,35 +1,54 @@
-import React, { FC } from "react";
+import React, { FC, ChangeEvent, useState, useEffect } from "react";
 
-import { cityPopulations, timeToWipe } from "../data/populations";
 import { deathRate } from "../data/deathCount";
+import { cityPopulations, timeToWipe } from "../data/populations";
 import { formatNumber, formatTime } from "../utils/numbers";
-import { Time } from "data-types";
+import { Time, CityPopulation } from "data-types";
 
 const Cities: FC = () => {
+    const cityOptions = cityPopulations.map((city) => (
+        <option key={city.name} value={city.name}>
+            {city.name}
+        </option>
+    ));
+
+    const [selectedCity, setCity] = useState<CityPopulation | undefined>(
+        undefined
+    );
+    const [time, setTime] = useState<Time | undefined>(undefined);
+
+    const handleChange = (e: ChangeEvent<HTMLSelectElement>) => {
+        e.preventDefault();
+        const city = cityPopulations.filter(
+            (c) => c.name === e.target.value
+        )[0];
+        setCity(city);
+    };
+
     const { avgDeaths } = deathRate();
 
-    const list = cityPopulations.map((city) => {
-        const { avgDeaths } = deathRate();
-        const time: Time = timeToWipe(city.population, avgDeaths);
-        return (
-            <li key={city.name}>
-                <b>{city.name}:</b> {formatTime(time)}
-                <em>
-                    (<small>pop: {formatNumber(city.population)}</small>)
-                </em>
-            </li>
-        );
-    });
+    useEffect(() => {
+        if (!selectedCity) return;
+        setTime(timeToWipe(selectedCity.population, avgDeaths));
+    }, [avgDeaths, selectedCity]);
 
     return (
         <div className="content">
-            <h2>City Populations</h2>
-            <p>
-                With an average death rate of {formatNumber(avgDeaths)} people
-                per day, it wouldn't take long to wipe out the populations of
-                these major cities:
-            </p>
-            <ul>{list}</ul>
+            <h4>
+                Select a city from the menu or enter your zipcode to compare the
+                death toll to a population.
+            </h4>
+            <select name="cities" id="city-selector" onChange={handleChange}>
+                <option value="">-- City --</option>
+                {cityOptions}
+            </select>
+            {selectedCity && time && (
+                <p>
+                    With a population of {formatNumber(selectedCity.population)}
+                    , {selectedCity.name} would be wiped out in{" "}
+                    {formatTime(time)}.
+                </p>
+            )}
         </div>
     );
 };

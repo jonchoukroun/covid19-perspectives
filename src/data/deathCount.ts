@@ -1,19 +1,17 @@
+import { DeathRate } from "data-types";
+
 export const deathCount: { date: string; deaths: number }[] = [
     {
+        // TODO: verify 1st death date
         date: "Feb 01, 2020",
         deaths: 1,
     },
     {
+        // TODO: query API and update daily
         date: "May 19, 2020",
         deaths: 90_694,
     },
 ];
-
-export type DeathRate = {
-    days: number;
-    totalDeaths: number;
-    avgDeaths: number;
-};
 
 export const deathRate = (): DeathRate => {
     const firstDay = Date.parse(deathCount[0].date);
